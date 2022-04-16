@@ -18,7 +18,9 @@ $(window).resize(function() {
 (function($) {
 	$.fn.typewriter = function() {
 		this.each(function() {
-			var $ele = $(this), str = $ele.html(), progress = 0;
+			var $ele = $(this), 
+				str = $ele.html(), 
+				progress = 0;
 			$ele.html('');
 			var timer = setInterval(function() {
 				var current = str.substr(progress, 1);
