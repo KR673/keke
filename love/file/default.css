@@ -28,7 +28,7 @@ a {
 }
 @font-face {
     font-family: myLiSu;
-    src: url(../STLITI.TTF);
+    src: url(../font/STLITI.TTF);
 }
 #wrap .say{
     font-size: 23px;
