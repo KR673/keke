@@ -26,25 +26,39 @@ a {
     height: 680px;
     margin-top: 180px;
 }
-
+@font-face {
+    font-family: myLiSu;
+    src: url(../STLITI.TTF);
+}
 #wrap .say{
-    font-size: 20px;
-    font-family: 'LiSu';
+    font-size: 23px;
+    /* font-family: 'LiSu'; */
+    font-family: myLiSu;
 }
 
+#wrap .say.cite{
+    font-size: 18px;
+    line-height: 20px;
+    color: #ff61fa;
+}
+
+/* #wrap .say:nth-child(6){
+    font-size: 10px;
+} */
+
 #text {
-    top: 60px;
+    top: 39px;
     line-height: 30px;
     width: 300px;
     height: 560px;
     /* left: 188px; */
-    left: 60px;
+    left: 120px;
     position: absolute;
 }
 
 #code {
     display: none;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 #clock-box {
@@ -94,7 +108,7 @@ a {
 }
 
 #together {
-    opacity: 0.9;
+    /* opacity: 0.9; */
     z-index: -10;
     position: relative;
     /* top: -80px; */
