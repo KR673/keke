@@ -60,3 +60,40 @@ function timeElapse(date){
 	var result = "第 <span class=\"digit\">" + days + "</span> 天 <span class=\"digit\">" + hours + "</span> 小时 <span class=\"digit\">" + minutes + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒"; 
 	$("#clock").html(result);
 }
+
+
+// 手机端播放延时问题, 没解决 -_-
+// function initMusic() {
+// 	var audio = document.createElement('audio');
+// 	audio.setAttribute('id', 'audio');
+// 	audio.setAttribute('autoplay', 'autoplay');
+// 	audio.setAttribute('loop', 'loop');
+// 	audio.innerHTML = '<source src="ForRiver.mp3" type="audio/mp3">';
+// 	document.body.appendChild(audio);
+// 	audio.load();
+// 	audio.play();
+// 	audio.pause();
+// 	document.addEventListener("WeixinJSBridgeReady", function () {
+// 		document.getElementById('audio').play();
+// 	}, false);
+// }
+
+// window.onload = function () {
+// 	// initMusic();
+
+// 	function autoPlayAudio() {
+// 		wx.config({
+// 			// 配置信息, 即使不正确也能使用 wx.ready
+// 			debug: false,
+// 			appId: '',
+// 			timestamp: 1,
+// 			nonceStr: '',
+// 			signature: '',
+// 			jsApiList: []
+// 		});
+// 		wx.ready(function() {
+// 			document.queryElementById('#audio').play();
+// 		});
+// 	}
+// 	autoPlayAudio()
+// };
