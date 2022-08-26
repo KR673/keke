@@ -5,7 +5,7 @@
     <title>日历</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/calendar.css">
-    <script src="js/calendar.js"></script>
+    <script src="./calander.js"></script>
 </head>
 
 <body onload="showDate()">
@@ -13,11 +13,7 @@
         <!--状态栏-->
         <div>
             <!--显示上个月按钮-->
-            <!-- <button onclick="lastMonth()">上个月</button> -->
-            <!--显示当前年份和月份-->
             <div id="month"></div>
-            <!-- 显示下个月按钮 -->
-            <!-- <button onclick="nextMonth()">下个月</button> -->
         </div>
 
         <!--显示星期几-->
@@ -32,12 +28,22 @@
         </div>
         <!--显示当前月份每天的日期-->
         <div id="day" class="day-c"></div>
+        <div class="operate">
+            <!--显示当前年份和月份-->
+            <button onclick="lastMonth()">
+            上一月
+            </button>
+
+            <!-- 显示下个月按钮 -->
+            <button onclick="nextMonth()">下一月</button>
+        </div>
     </div>
 </body>
 <style>
     #calendar {
         width: 80%;
         margin: auto;
+        margin-top: 30px;
     }
     .week-c div, .day-c div {
         text-align: center;
@@ -49,6 +55,7 @@
         grid-template-columns: repeat(7, 14%);
         display: grid;
     }
+
     .week-c {
         grid-template-rows: 60px;
         font-size: 45px;
@@ -56,16 +63,35 @@
         font-family: fangsong;
         margin-bottom: 30px;
     }
+
     .day-c {
         border-top: 1px solid #8f8f8f;
         grid-template-rows: repeat(5, 100px);
         font-size: 35px;
     }
+    .day-c .everyday {
+        width: 60px;
+    }
+    .day-c p {
+        font-size: 15px;
+        margin: 0;
+    }
 
+    .operate {
+        margin-top: 45px;
+        display: flex;
+        justify-content: space-around;
+    }
     button {
-        width: 25%;
-        float: left;
-        height: 40px;
+        width: 170px;
+        height: 60px;
+        font-size: 35px;
+        background-color: #f0f8ff00;
+        border: 2px solid orangered;
+        color: orangered;
+        padding: 3px;
+        font-family: fangsong;
+        border-radius: 15px;
     }
 
     .today {
@@ -154,9 +180,11 @@
 
         //使用循环语句将当前月份的所有日期显示出来
         for (var j = 1; j <= allday; j++) {
+            let dayCurrent = j
             var dayElement = document.createElement("div");
             dayElement.className = "everyday";
-            dayElement.innerHTML = j + "";
+            dayElement.innerHTML = j + "<p>" + getLunar(j) + "</p>";
+            calendar.solar2lunar(year,month,j)
 
             //如果日期为今天，将内容显示为红色
             if (j == day) {
@@ -165,6 +193,18 @@
             }
 
             daterow.appendChild(dayElement);
+        }
+    }
+
+    // 获取农历或节日
+    function getLunar(day) {
+        let info = calendar.solar2lunar(year, month, day)
+        let priority = ['lunarFestival', 'festival', 'Term', 'IDayCn']
+        for (p in priority) {
+            let valueOfInfo = info[priority[p]]
+            if (valueOfInfo) {
+                return valueOfInfo
+            }
         }
     }
 
