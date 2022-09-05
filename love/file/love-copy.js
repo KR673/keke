@@ -348,7 +348,7 @@
             while (true) {
                 // x = random(20, width - 20);
                 // y = random(20, height - 20);
-                x = random(20, 960);
+                x = random(0, 960);
                 y = 0;
                 return new Bloom(this, new Point(x, y), figure, color, alpha, angle, scale, place, speed);
                 // if (inheart(x - width / 2, height - (height - 40) / 2 - y, radius)) {
