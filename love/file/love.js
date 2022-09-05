@@ -348,6 +348,7 @@
             while (true) {
                 x = random(20, width - 20);
                 y = random(20, height - 20);
+                // 确定Bloom位置是在心形的大树上
                 if (inheart(x - width / 2, height - (height - 40) / 2 - y, radius)) {
                     return new Bloom(this, new Point(x, y), figure, color, alpha, angle, scale, place, speed);
                 }
@@ -518,6 +519,9 @@
                 s.tree.removeBloom(s);
             } else {
                 s.draw();
+                // s.place 为bloom的终点
+                // s.point 为bloom的起点
+                // 这段代码的目的在于根据速度spean和起终与终点的位置, 计算下一次bloom的位置
                 s.point = s.place.sub(s.point).div(s.speed).add(s.point);
                 s.angle += 0.05;
                 s.speed -= 1;
