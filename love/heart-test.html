@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="1000px" id="heard-canvas"></canvas>
+    <script>
+        
+    function random(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+    }
+
+    Point = function(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+    }
+    Point.prototype = {
+        clone: function() {
+            return new Point(this.x, this.y);
+        },
+        add: function(o) {
+            p = this.clone();
+            p.x += o.x;
+            p.y += o.y;
+            return p;
+        },
+        sub: function(o) {
+            p = this.clone();
+            p.x -= o.x;
+            p.y -= o.y;
+            return p;
+        },
+        div: function(n) {
+            p = this.clone();
+            p.x /= n;
+            p.y /= n;
+            return p;
+        },
+        mul: function(n) {
+            p = this.clone();
+            p.x *= n;
+            p.y *= n;
+            return p;
+        }
+    }
+
+    var points = [], x, y, t;
+    for (var i = 10; i < 30; i += 0.2) {
+        t = i / Math.PI;
+        x = 16 * Math.pow(Math.sin(t), 3);
+        y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        points.push(new Point(x, y));
+    }
+    length = points.length;
+    
+    var ctx = document.getElementById('heard-canvas')
+    ctx = ctx.getContext('2d');
+
+    ctx.save();
+    ctx.fillStyle = 'rgb(255,' + random(0, 255) + ',' + random(0, 255) + ')';
+    ctx.translate(200, 200);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    for (var i = 0; i < length; i++) {
+        var p = points[i].mul(2 || 1);
+        ctx.lineTo(p.x, -p.y);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    s.point = s.place.sub(s.point).div(s.speed).add(s.point);
+    s.angle += 0.05;
+    s.speed -= 1;
+
+    </script>
+</body>
+</html>

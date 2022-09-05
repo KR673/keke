@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/calendar.css">
     <script src="./calander.js"></script>
+    <script type="text/javascript" src="./file/jquery.min.js"></script>
 </head>
-
 <body onload="showDate()">
+    <div id="heart-flow"></div>
     <div id="calendar">
         <!--状态栏-->
         <div>
@@ -37,13 +38,43 @@
             <!-- 显示下个月按钮 -->
             <button onclick="nextMonth()">下一月</button>
         </div>
+        <div class="img-c">
+            <img src="https://mynoteimg.oss-cn-beijing.aliyuncs.com/20220905204816.png" alt="">
+        </div>
     </div>
 </body>
 <style>
+    #heart-flow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    #canvas {
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+    }
+    #main, body, html {
+        width: 100%;
+        height: 100%;
+    }
+
+    .img-c {
+        /* background-color: black; */
+        width: 100%;
+        height: auto;
+    }
+    .img-c img {
+        width: 100%;
+        height: auto;
+    }
     #calendar {
         width: 80%;
         margin: auto;
         margin-top: 30px;
+        z-index: 1000;
     }
     .week-c div, .day-c div {
         text-align: center;
@@ -81,6 +112,8 @@
         margin-top: 45px;
         display: flex;
         justify-content: space-around;
+        position: relative;
+        z-index: 20;
     }
     button {
         width: 170px;
@@ -116,6 +149,10 @@
     } */
 </style>
 <script>
+    $(document).ready(function () {
+        $('#heart-flow').load('test.html');
+    });
+
     var today = new Date();
     var year = today.getFullYear();
     //获取当前年份
@@ -202,7 +239,9 @@
         let priority = ['lunarFestival', 'festival', 'Term', 'IDayCn']
         for (p in priority) {
             let valueOfInfo = info[priority[p]]
-            if (valueOfInfo) {
+            if (year === 2022 && month === 9 && day === 11) {
+                return '订婚'
+            }else if (valueOfInfo) {
                 return valueOfInfo
             }
         }
