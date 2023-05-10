@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../file/crypto-js.min.js"></script>
+    <script src="../file/jquery.min.js"></script>
+    <style>
+        #before, #after{
+            width: 600px;
+            height: 300px;
+        }
+        #operate{
+            width: 600px;
+        }
+        .text-input{
+            width: 100%;
+            height: 100%;
+        }
+        .container{
+            margin-bottom: 15px;
+        }
+        #operate{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="before" class="container">
+        <textarea class="text-input"></textarea>
+    </div>
+
+    <div id="operate" class="container">
+        <input type="text"/ id="salt">
+        <button id="encrypt">加密</button>
+        <button id="decrypt">解密</button>
+    </div>
+
+    <div id="after" class="container">
+        <textarea class="text-input"></textarea>
+    </div>
+    <script>
+        $('#encrypt').on('click', () => {
+            var context = $('#before textarea').val()
+            var ciphertext = CryptoJS.AES.encrypt(context, getSalt()).toString();
+
+            $('#after textarea').val(ciphertext)
+        })
+
+        $('#decrypt').on('click', () => {
+            var ciphertext = $('#before textarea').val()
+            var bytes  = CryptoJS.AES.decrypt(ciphertext, getSalt());
+            var decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+
+            $('#after textarea').val(decryptedData)
+        })
+        function getSalt() {
+            return $('#salt').val()
+        }
+    </script>
+</body>
+</html>
