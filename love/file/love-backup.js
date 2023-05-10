@@ -1,4 +1,4 @@
-﻿(function(window){
+(function(window){
 
     function random(min, max) {
         return min + Math.floor(Math.random() * (max - min + 1));
@@ -187,6 +187,7 @@
 
     Footer = function(tree, width, height, speed) {
         this.tree = tree;
+        var heart = tree.heart
         this.point = new Point(tree.seed.heart.point.x, tree.height - height / 2);
         this.width = width;
         this.height = height;
@@ -226,9 +227,21 @@
 
         this.record = {};
         
-        this.initSeed();
-        this.initFooter();
-        this.initBranch();
+        // this.initSeed();
+        this.seed = {
+            heart: {
+                scale  : 2,
+                color  : "rgb(190, 26, 37)",
+                figure : new Heart(),
+                point: {
+                    x: 530,
+                    y: 340
+                }
+            }
+        }
+        // this.initFooter();
+        // this.initBranch();
+        console.log(this.opt.footer)
         this.initBloom();
     }
     Tree.prototype = {
@@ -264,6 +277,7 @@
                 width = bloom.width || this.width,
                 height = bloom.height || this.height,
                 figure = this.seed.heart.figure;
+                // figure = this.heart;
             var r = 240, x, y;
             for (var i = 0; i < num; i++) {
                 cache.push(this.createBloom(width, height, r, figure));
@@ -348,7 +362,6 @@
             while (true) {
                 x = random(20, width - 20);
                 y = random(20, height - 20);
-                // 确定Bloom位置是在心形的大树上
                 if (inheart(x - width / 2, height - (height - 40) / 2 - y, radius)) {
                     return new Bloom(this, new Point(x, y), figure, color, alpha, angle, scale, place, speed);
                 }
@@ -519,9 +532,6 @@
                 s.tree.removeBloom(s);
             } else {
                 s.draw();
-                // s.place 为bloom的终点
-                // s.point 为bloom的起点
-                // 这段代码的目的在于根据速度spean和起终与终点的位置, 计算下一次bloom的位置
                 s.point = s.place.sub(s.point).div(s.speed).add(s.point);
                 s.angle += 0.05;
                 s.speed -= 1;

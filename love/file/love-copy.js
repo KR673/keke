@@ -1,4 +1,4 @@
-﻿(function(window){
+(function(window){
 
     function random(min, max) {
         return min + Math.floor(Math.random() * (max - min + 1));
@@ -346,12 +346,13 @@
         createBloom: function(width, height, radius, figure, color, alpha, angle, scale, place, speed) {
             var x, y;
             while (true) {
-                x = random(20, width - 20);
-                y = random(20, height - 20);
-                // 确定Bloom位置是在心形的大树上
-                if (inheart(x - width / 2, height - (height - 40) / 2 - y, radius)) {
-                    return new Bloom(this, new Point(x, y), figure, color, alpha, angle, scale, place, speed);
-                }
+                // x = random(20, width - 20);
+                // y = random(20, height - 20);
+                x = random(0, 960);
+                y = 0;
+                return new Bloom(this, new Point(x, y), figure, color, alpha, angle, scale, place, speed);
+                // if (inheart(x - width / 2, height - (height - 40) / 2 - y, radius)) {
+                // }
             }
         },
         
@@ -415,14 +416,14 @@
                     blooms[i].jump();
                 }
             } 
-            if ((blooms.length && blooms.length < 3) || !blooms.length) {
+            if ((blooms.length && blooms.length < 6) || !blooms.length) {
                 var bloom = this.opt.bloom || {},
                     width = bloom.width || this.width,
                     height = bloom.height || this.height,
                     figure = this.seed.heart.figure;
                 var r = 240, x, y;
                 for (var i = 0; i < random(1,2); i++) {
-                    blooms.push(this.createBloom(width / 2 + width, height, r, figure, null, 1, null, 1, new Point(random(-100,600), 720), random(200,300)));
+                    blooms.push(this.createBloom(width / 2 + width, height, r, figure, null, 1, null, 1, new Point(random(-100,1080), 2160), random(300,900)));
                 }
             }
         }
@@ -519,9 +520,6 @@
                 s.tree.removeBloom(s);
             } else {
                 s.draw();
-                // s.place 为bloom的终点
-                // s.point 为bloom的起点
-                // 这段代码的目的在于根据速度spean和起终与终点的位置, 计算下一次bloom的位置
                 s.point = s.place.sub(s.point).div(s.speed).add(s.point);
                 s.angle += 0.05;
                 s.speed -= 1;
